@@ -1,5 +1,6 @@
 package GUI;
 
+import Squares.SkinLoader;
 import Squares.Square;
 import Turns.TurnManager;
 import Turns.AlertManager;
@@ -8,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import java.util.Random;
 
 import static GUI.BoardSizeManager.*;
@@ -16,13 +18,11 @@ import static Turns.TurnManager.*;
 import static java.lang.String.format;
 
 public class MainFrame extends JFrame {
-    private final LoadingScreen loadingScreen;
     public TurnManager turnManager;
     public static Square blackCatSquare;
     public static Square whiteCatSquare;
 
-    public MainFrame(TurnManager turnManager, LoadingScreen ls) throws HeadlessException {
-        this.loadingScreen = ls;
+    public MainFrame(TurnManager turnManager, SkinLoader sl) throws HeadlessException {
 
         this.addKeyListener(new KeyAdapter() {
             @Override
@@ -68,7 +68,14 @@ public class MainFrame extends JFrame {
         setLayout(null);
         addSquares();
         setVisible(true);
-        ls.dispose();
+
+        try {
+            SkinLoader.getConnection().close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        sl.dispose();
         alert();
     }
 

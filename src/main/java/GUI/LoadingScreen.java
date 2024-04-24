@@ -1,4 +1,5 @@
 package GUI;
+import Squares.SkinLoader;
 import Turns.TurnManager;
 
 import javax.swing.*;
@@ -22,7 +23,7 @@ public class LoadingScreen extends JFrame {
             public void keyTyped(KeyEvent e) {
                 super.keyTyped(e);
                 if (e.getKeyChar() == '\n') {
-                    new SkinSelector(loadingScreenRef);
+                    new SkinLoader(loadingScreenRef);
                 }
             }
         });

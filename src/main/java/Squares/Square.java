@@ -16,38 +16,10 @@ import static java.lang.Integer.parseInt;
 
 public class Square extends JPanel {
 
-    public static BufferedImage black_cat;
-    public static BufferedImage white_cat;
-
-    public static BufferedImage paloma_negra_quieta;
-    public static BufferedImage paloma_negra_movida;
-    public static BufferedImage paloma_blanca_quieta;
-    public static BufferedImage paloma_blanca_movida;
-
-    public static ImageIcon gif_gn;
-    public static ImageIcon gif_gb;
-
-    static {
-        try {
-            black_cat = scaleImage(ImageIO.read(new File("Images\\black_cat.png")));
-            white_cat = scaleImage(ImageIO.read(new File("Images\\white_cat.png")));
-
-            paloma_negra_quieta = scaleImage(ImageIO.read(new File("Images\\black_paloma_default_quieta.png")));
-            paloma_blanca_quieta = scaleImage(ImageIO.read(new File("Images\\white_paloma_default_quieta.png")));
-
-            paloma_negra_movida = scaleImage(ImageIO.read(new File("Images\\black_paloma_default_movida.png")));
-            paloma_blanca_movida = scaleImage(ImageIO.read(new File("Images\\white_paloma_default_movida.png")));
-
-            gif_gn = new ImageIcon("Images\\black_cat_gif.gif");
-            gif_gn.setImage(gif_gn.getImage().getScaledInstance(squareSize, squareSize, Image.SCALE_DEFAULT));
-
-            gif_gb = new ImageIcon("Images\\white_cat_gif.gif");
-            gif_gb.setImage(gif_gb.getImage().getScaledInstance(squareSize, squareSize, Image.SCALE_DEFAULT));
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    private static BufferedImage catSkinJ1;
+    private static BufferedImage catSkinJ2;
+    private static BufferedImage palomaSkinJ1;
+    private static BufferedImage palomaSkinJ2;
 
     public final String id;
     public int squareType;
@@ -68,6 +40,22 @@ public class Square extends JPanel {
         this.id = id;
     }
 
+    public static void setCatSkinJ1(BufferedImage s) {
+        catSkinJ1 = scaleImage(s);
+    }
+
+    public static void setCatSkinJ2(BufferedImage s) {
+        catSkinJ2 = scaleImage(s);
+    }
+
+    public static void setPalomaSkinJ1(BufferedImage s) {
+        palomaSkinJ1 = scaleImage(s);
+    }
+
+    public static void setPalomaSkinJ2(BufferedImage s) {
+        palomaSkinJ2 = scaleImage(s);
+    }
+
     public void setSquareType(int squareType) {
         this.squareType = squareType;
     }
@@ -83,6 +71,7 @@ public class Square extends JPanel {
     public boolean isBlackCat() {
         return squareType == 3 || squareType == 9;
     }
+
     public boolean isWhiteCat() {
         return squareType == 4 || squareType == 10;
     }
@@ -94,19 +83,21 @@ public class Square extends JPanel {
     public boolean isCat() {
         return isBlackCat() || isWhiteCat();
     }
+
     public boolean isPaloma() {
         return squareType == 5 || squareType == 6;
     }
+
     public boolean isEnemyPaloma() {
-        return  ( (currentTurn == 1 && isWhitePalomaQuieta()) ||  (currentTurn == 2 && isBlackPalomaQuieta()) );
+        return ((currentTurn == 1 && isWhitePalomaQuieta()) || (currentTurn == 2 && isBlackPalomaQuieta()));
     }
 
     public boolean isFriendlyPaloma() {
-        return  ( (currentTurn == 1 && isBlackPalomaQuieta()) ||  (currentTurn == 2 && isWhitePalomaQuieta()) );
+        return ((currentTurn == 1 && isBlackPalomaQuieta()) || (currentTurn == 2 && isWhitePalomaQuieta()));
     }
 
     public boolean isBlackTeam() {
-        return getRow() <= nRows/2;
+        return getRow() <= nRows / 2;
     }
 
     public boolean isBlackPalomaQuieta() {
@@ -136,17 +127,19 @@ public class Square extends JPanel {
                 g2d.fillRect(0, 0, getWidth(), getHeight());
                 break;
             case 3:
-                g.drawImage(black_cat, 0, 0, this);
+                g.drawImage(catSkinJ1, 0, 0, this);
                 break;
+
             case 4:
-                g.drawImage(white_cat, 0, 0, this);
+                g.drawImage(catSkinJ2, 0, 0, this);
                 break;
             case 5:
-                g.drawImage(paloma_negra_quieta, 0, 0, this);
+                g.drawImage(palomaSkinJ1, 0, 0, this);
                 break;
             case 6:
-                g.drawImage(paloma_blanca_quieta, 0, 0, this);
+                g.drawImage(palomaSkinJ2, 0, 0, this);
                 break;
+                /*
             case 7:
                 g.drawImage(paloma_negra_movida, 0, 0, this);
                 break;
@@ -159,20 +152,21 @@ public class Square extends JPanel {
             case 10:
                 gif_gb.paintIcon(this, g, 0, 0);
                 break;
+        }*/
         }
     }
 
-    private static BufferedImage scaleImage(BufferedImage originalImage) {
-        Image scaledImage = originalImage.getScaledInstance(squareSize, squareSize, SCALE_SMOOTH);
-        BufferedImage bufferedImage = new BufferedImage(squareSize, squareSize, TYPE_INT_ARGB);
-        Graphics2D g2d = bufferedImage.createGraphics();
-        g2d.drawImage(scaledImage, 0, 0, null);
-        g2d.dispose();
-        return bufferedImage;
-    }
+        private static BufferedImage scaleImage (BufferedImage originalImage){
+            Image scaledImage = originalImage.getScaledInstance(squareSize, squareSize, SCALE_SMOOTH);
+            BufferedImage bufferedImage = new BufferedImage(squareSize, squareSize, TYPE_INT_ARGB);
+            Graphics2D g2d = bufferedImage.createGraphics();
+            g2d.drawImage(scaledImage, 0, 0, null);
+            g2d.dispose();
+            return bufferedImage;
+        }
 
-    @Override
-    public String toString() {
-        return "ID: " + id;
+        @Override
+        public String toString () {
+            return "ID: " + id;
+        }
     }
-}

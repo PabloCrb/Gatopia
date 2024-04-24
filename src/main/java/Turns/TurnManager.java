@@ -61,7 +61,6 @@ public class TurnManager {
                             changeSquareType(square.id, 5);
                             square.repaint();
                             nPalomasColocadasJ1++;
-                            System.out.println(nPalomasColocadasJ1);
                             if (nPalomasColocadasJ1 == nPalomas) {
                                 setCurrentTurn(-2);
                                 AlertManager.alert();
