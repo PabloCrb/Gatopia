@@ -1,6 +1,5 @@
 package GUI;
 import Squares.SkinLoader;
-import Turns.TurnManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +21,7 @@ public class LoadingScreen extends JFrame {
             @Override
             public void keyTyped(KeyEvent e) {
                 super.keyTyped(e);
-                if (e.getKeyChar() == '\n') {
+                if (e.getKeyChar() == '\n' || e.getKeyChar() == ' ') {
                     new SkinLoader(loadingScreenRef);
                 }
             }

@@ -3,7 +3,6 @@ package GUI;
 import Squares.SkinLoader;
 import Squares.Square;
 import Turns.TurnManager;
-import Turns.AlertManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +32,7 @@ public class MainFrame extends JFrame {
                 if (e.getKeyChar() == 'r' && currentTurn == -1) {
                     for (int i=0; i < 5; i++) {
                         int random_index = random.nextInt(3*nRows);
-                        while (!turnManager.squares.get(random_index).isEmptySquare()) random_index = random.nextInt(2*nRows);
+                        while (!turnManager.squares.get(random_index).isEmptySquare()) random_index = random.nextInt(3*nRows);
                         Square s = turnManager.squares.get(random_index);
                         s.setSquareType(5);
                         s.repaint();
@@ -45,7 +44,7 @@ public class MainFrame extends JFrame {
                 } else if (e.getKeyChar() == 'r' && currentTurn == -2) {
                     for (int i=0; i< 5; i++) {
                         int random_index = 80 + random.nextInt(20);
-                        while (!turnManager.squares.get(random_index).isEmptySquare()) random_index = random.nextInt(70 + random.nextInt(30));
+                        while (!turnManager.squares.get(random_index).isEmptySquare()) random_index = 70 + random.nextInt(random.nextInt(30));
                         Square s = turnManager.squares.get(random_index);
                         s.setSquareType(6);
                         s.repaint();
@@ -108,5 +107,4 @@ public class MainFrame extends JFrame {
         blackCatSquare = turnManager.squares.get(turnManager.getIndex(id_bc));
         whiteCatSquare = turnManager.squares.get(turnManager.getIndex(id_wc));
     }
-
 }
