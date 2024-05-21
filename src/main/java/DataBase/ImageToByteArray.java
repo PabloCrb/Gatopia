@@ -2,17 +2,26 @@ package DataBase;
 
 import java.io.*;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ImageToByteArray {
-    public static void insertImage(String nombre, byte[] imageData) {
+    public static void insertImage(String pack, List<byte[]> imageData) {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:db/skin_db.db");
 
             // Insertar la imagen en la base de datos
-            PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO Skins (Nombre, Imagen) VALUES (?, ?)");
-            insertStatement.setString(1, nombre);
-            insertStatement.setBytes(2, imageData);
+            PreparedStatement insertStatement = connection.prepareStatement(
+                    "INSERT INTO Skins (PackName, CatSkin, PalomaSkin, PalomaMovida, TreeSkin, PaloSkin, PajareraSkin) " +
+                            "VALUES (?, ?, ?, ?, ?, ?, ?)");
+            insertStatement.setString(1, pack);
+            insertStatement.setBytes(2, imageData.get(0));
+            insertStatement.setBytes(3, imageData.get(1));
+            insertStatement.setBytes(4, imageData.get(2));
+            insertStatement.setBytes(5, imageData.get(3));
+            insertStatement.setBytes(6, imageData.get(4));
+            insertStatement.setBytes(7, imageData.get(5));
             insertStatement.executeUpdate();
 
             System.out.println("Imagen insertada correctamente en la base de datos.");
@@ -31,27 +40,35 @@ public class ImageToByteArray {
     }
 
     public static void main(String[] args) {
-        String name = "Paloma_black_bichota";
-        String imageName = "Images/n.png";
-        byte[] imageData = null;
+        String pack = "BLACK_DEFAULT";
+        List<String> names = new ArrayList<>();
+        names.add("Images/a.PNG");
+        names.add("Images/b.PNG");
+        names.add("Images/c.PNG");
+        names.add("Images/d.PNG");
+        names.add("Images/e.PNG");
+        names.add("Images/f.PNG");
 
-        try {
-            ByteArrayOutputStream baos = getByteArrayOutputStream(imageName);
+        List<byte[]> images = new ArrayList<>();
 
-            imageData = baos.toByteArray();
-        } catch (IOException e) {
-            e.printStackTrace();
+        // Leer todas las imágenes y convertirlas a byte arrays
+        for (String name : names) {
+            try {
+                ByteArrayOutputStream baos = getByteArrayOutputStream(name);
+                images.add(baos.toByteArray());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
 
         // Insertar la imagen en la base de datos
-        insertImage(name, imageData);
+        insertImage(pack, images);
     }
 
     private static ByteArrayOutputStream getByteArrayOutputStream(String imageName) throws IOException {
         File imageFile = new File(imageName);
         ByteArrayOutputStream baos;
         try (FileInputStream fis = new FileInputStream(imageFile)) {
-
             baos = new ByteArrayOutputStream();
             byte[] buffer = new byte[1024];
             int bytesRead;

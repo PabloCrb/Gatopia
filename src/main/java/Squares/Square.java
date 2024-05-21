@@ -1,11 +1,8 @@
 package Squares;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 import static GUI.BoardSizeManager.nRows;
 import static GUI.BoardSizeManager.squareSize;
@@ -20,21 +17,11 @@ public class Square extends JPanel {
     private static BufferedImage catSkinJ2;
     private static BufferedImage palomaSkinJ1;
     private static BufferedImage palomaSkinJ2;
+    private static BufferedImage pajareraSkinJ1;
+    private static BufferedImage pajareraSkinJ2;
 
     public final String id;
     public int squareType;
-
-    //1 -> EmptySquare blue team
-    //2 -> EmptySquare red team
-    //3 -> Minino negro
-    //4 -> Minino blanco
-    //5 -> Paloma negra quieta
-    //6 -> Paloma blanca quieta
-    //7 -> Paloma negra movida
-    //8 -> Paloma blanca movida
-
-    //9 -> GIF gato negro
-    //10 -> GIF gato blanco
 
     public Square(String id) {
         this.id = id;
@@ -54,6 +41,14 @@ public class Square extends JPanel {
 
     public static void setPalomaSkinJ2(BufferedImage s) {
         palomaSkinJ2 = scaleImage(s);
+    }
+
+    public static void setPajareraSkinJ1(BufferedImage s) {
+        pajareraSkinJ1 = scaleImage(s);
+    }
+
+    public static void setPajareraSkinJ2(BufferedImage s) {
+        pajareraSkinJ2 = scaleImage(s);
     }
 
     public void setSquareType(int squareType) {
@@ -139,20 +134,12 @@ public class Square extends JPanel {
             case 6:
                 g.drawImage(palomaSkinJ2, 0, 0, this);
                 break;
-                /*
             case 7:
-                g.drawImage(paloma_negra_movida, 0, 0, this);
+                g.drawImage(pajareraSkinJ1, 0, 0, this);
                 break;
             case 8:
-                g.drawImage(paloma_blanca_movida, 0, 0, this);
+                g.drawImage(pajareraSkinJ2, 0, 0, this);
                 break;
-            case 9:
-                gif_gn.paintIcon(this, g, 0, 0);
-                break;
-            case 10:
-                gif_gb.paintIcon(this, g, 0, 0);
-                break;
-        }*/
         }
     }
 
