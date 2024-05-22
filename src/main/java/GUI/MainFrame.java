@@ -1,6 +1,5 @@
 package GUI;
 
-import Squares.SkinLoader;
 import Squares.Square;
 import Turns.TurnManager;
 

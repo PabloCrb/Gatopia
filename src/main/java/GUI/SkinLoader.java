@@ -1,6 +1,4 @@
-package Squares;
-
-import GUI.LoadingScreen;
+package GUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,14 +45,13 @@ public class SkinLoader extends JFrame {
         JPanel southPanel = new JPanel(new BorderLayout());
         JButton chooseButton = new JButton("Elegir");
         chooseButton.addActionListener(e -> chooseImage());
-        southPanel.add(chooseButton, BorderLayout.SOUTH);
-        chooseButton.setPreferredSize(new Dimension(60, 60));
+        southPanel.add(chooseButton, BorderLayout.CENTER);
 
         JPanel bottomMargin = new JPanel();
-        bottomMargin.setPreferredSize(new Dimension(60, 20));
         southPanel.add(bottomMargin, BorderLayout.SOUTH);
 
-        buttonPanel.add(southPanel, BorderLayout.SOUTH);
+        this.add(buttonPanel, BorderLayout.SOUTH);
+        this.add(southPanel, BorderLayout.SOUTH);
 
         imageLabel = new JLabel();
         imageLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -63,7 +60,6 @@ public class SkinLoader extends JFrame {
         }
 
         this.add(imageLabel, BorderLayout.CENTER);
-        this.add(buttonPanel, BorderLayout.SOUTH);
     }
 
     private List<ImageIcon> loadImagesFromFolder(String folderPath) {
@@ -106,7 +102,6 @@ public class SkinLoader extends JFrame {
         if (!images.isEmpty()) {
             ImageIcon selectedImage = images.get(currentIndex);
             JOptionPane.showMessageDialog(this, "Has elegido una imagen.");
-            // Aquí puedes agregar la lógica para manejar la imagen seleccionada
         }
     }
 

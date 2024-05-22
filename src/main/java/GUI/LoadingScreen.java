@@ -1,5 +1,4 @@
 package GUI;
-import Squares.SkinLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,8 +10,7 @@ public class LoadingScreen extends JFrame {
     private final LoadingScreen loadingScreenRef;
 
     static {
-        loading_gif = new ImageIcon("GIFS\\caza_de_palomas.gif");
-        loading_gif.setImage(loading_gif.getImage().getScaledInstance(655, 680, Image.SCALE_DEFAULT));
+        loading_gif = new ImageIcon("GIFS\\portada 2.gif");
     }
 
     public LoadingScreen() throws HeadlessException {
