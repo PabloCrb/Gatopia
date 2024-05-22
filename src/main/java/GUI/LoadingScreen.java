@@ -10,7 +10,7 @@ public class LoadingScreen extends JFrame {
     private final LoadingScreen loadingScreenRef;
 
     static {
-        loading_gif = new ImageIcon("GIFS\\portada 2.gif");
+        loading_gif = new ImageIcon("GIFS\\PORTADA.gif");
     }
 
     public LoadingScreen() throws HeadlessException {
@@ -27,21 +27,15 @@ public class LoadingScreen extends JFrame {
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("GATOS Y PALOMAS");
+        setSize(675, 710);
+        setLocationRelativeTo(null);
         setContentPane(new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-
-                // Pintar el rectángulo blanco
-                g.setColor(Color.WHITE);
-                g.fillRect(0, 0, getWidth(), getHeight());
-
-                // Pintar el GIF
                 loading_gif.paintIcon(this, g, 0, 0);
             }
         });
-        setSize(675, 710);
-        setLocationRelativeTo(null);
         setVisible(true);
     }
 
